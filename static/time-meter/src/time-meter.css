@@ -1,0 +1,44 @@
+.horizontal-center{
+	position: absolute;
+	left: 50%;
+	margin-left: -200px;  
+}
+.time-meter-canvas{
+	background-color: #ECECEC;
+	height: 250px;
+	width: 400px;
+}
+.time-btn-holder{
+	text-align: center;
+}
+.time-btn-holder a{
+	border-radius: 2px;
+    box-shadow: 0 2px 2px #ccc;
+    color: #fff;
+    text-decoration: none !important;
+    padding: 15px 30px;
+    display: none;
+    cursor: pointer;
+    position: relative;
+    top: 20px;
+    margin:  20px;
+    z-index: 1;
+}
+.timer-btn-blue{
+	background-color: #82cddd;
+	background-image: -webkit-linear-gradient(top, #86d3e4, #82cddd);
+	background-image: -moz-linear-gradient(top, #86d3e4, #82cddd);
+	background-image: linear-gradient(top, #86d3e4, #82cddd);
+	border-color: #72c1d2;
+}
+.timer-btn-pink{
+	background-color: #f6a7b3;
+	background-image: -webkit-linear-gradient(top, #f6a7b3, #f0a3af);
+	background-image: -moz-linear-gradient(top, #f6a7b3, #f0a3af);
+	background-image: linear-gradient(top, #f6a7b3, #f0a3af);
+	border-color: #eb9ba7;
+}
+.timer-btn-gray{
+	background-color: #dedede;
+	color: #918B8B !important;
+}

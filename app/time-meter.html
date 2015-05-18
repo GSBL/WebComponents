@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>time-meter</title>
+	<link rel="stylesheet" type="text/css" href="../static/time-meter/src/time-meter.css">
+</head>
+<body>
+	<script type="text/javascript" src="../sea-modules/seajs/2.2.0/sea.js"></script>
+	<script type="text/javascript">
+		seajs.config({
+			base: "../sea-modules/",
+			alias: {
+				jquery: "jquery/jquery/1.10.1/jquery.js",
+				Base: "webComponents/Base.js"
+			}
+		});
+		seajs.use("../static/time-meter/src/index");
+	</script>
+</body>
+</html>
