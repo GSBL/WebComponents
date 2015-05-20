@@ -566,7 +566,7 @@ var DateTimePicker = (function() {
 		/**
 		 * 组件模板
 		 */
-		template: '<div class="rgb-dtp " style="display:none;"><div class="dtp-date"><div class="date-header"><a title="上个月" class="icon icon-l">l</a><a class="icon icon-h" title="今天">h</a><select class="header-year"></select><select class="header-month"></select><a class="icon icon-r">r</a></div><div class="data-calendar"><table><thead><tr><th>周日</th><th>周一</th><th>周二</th><th>周三</th><th>周四</th><th>周五</th><th>周六</th></tr></thead><tbody></tbody></table></div></div></div>',
+		template: '<div class="rgb-dtp <%= createTime %> " style="display:none;"><div class="dtp-date"><div class="date-header"><a title="上个月" class="icon icon-l">l</a><a class="icon icon-h" title="今天">h</a><select class="header-year"></select><select class="header-month"></select><a class="icon icon-r">r</a></div><div class="data-calendar"><table><thead><tr><th>周日</th><th>周一</th><th>周二</th><th>周三</th><th>周四</th><th>周五</th><th>周六</th></tr></thead><tbody></tbody></table></div></div></div>',
 		/**
 		 * 真正的初始化操作
 		 */
@@ -580,7 +580,7 @@ var DateTimePicker = (function() {
 			self.curShowDate = self.selectedDate;
 
 			// 渲染摸板
-			self.render();
+			self.render({"createTime":new Date().getTime()});
 
 			// 储存相关节点，以便其他函数调用
 			self.set("rgbDTP", $(".rgb-dtp"));
