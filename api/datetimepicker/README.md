@@ -8,6 +8,16 @@ Datetimepicker是一个日期选择组件
 ## 依赖说明
 * 本组件基于jquery开发，引入组件时请确保已经引入jquery
 
+## 引入组件
+
+```html
+<head><link rel="stylesheet" type="text/css" href="../static/datetimepicker/src/datetimepicker.css"></head>
+
+<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/datetimepicker/src/datetimepicker.js"></script>
+<>
+```
+
 ## 初始化组件
 
     new DateTimePicker({参数列表});
