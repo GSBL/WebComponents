@@ -11,11 +11,12 @@ Datetimepicker是一个日期选择组件
 ## 引入组件
 
 ```html
+`css部分`
 <head><link rel="stylesheet" type="text/css" href="../static/datetimepicker/src/datetimepicker.css"></head>
 
+`js部分`
 <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="../static/datetimepicker/src/datetimepicker.js"></script>
-<>
 ```
 
 ## 初始化组件
