@@ -56,7 +56,7 @@ Datetimepicker是一个日期选择组件
         * 参数：相关日期，`Date`类型
     * setPosition()
         * 功能：将组件模块定位到start元素下面
-            
+* 日期处理方法          
     * changeDate(date, num, dateType)
         * 功能：按要求更改时间
         * 参数：date指被参照的时间，Date类型
