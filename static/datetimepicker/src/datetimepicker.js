@@ -564,6 +564,8 @@ var DateTimePicker = (function() {
 			self.set("headerMonth", ".header-month");
 			self.set("dataCalendar", ".data-calendar");
 
+			self.set("dtpNode",".dtp-"+self.createTime);
+
 			// 绑定事件
 			self.bind();
 		},
@@ -574,7 +576,8 @@ var DateTimePicker = (function() {
 			var self = this;
 
 			// 组件的事件代理到该节点下面
-			var dtpNode = $(".dtp-"+self.createTime);
+			var dtpNode = $(self.get("dtpNode"));
+			// console.log(dtpNode)
 
 			// 显示组件事件
 			self.get("start").on("click", function() {
@@ -606,7 +609,7 @@ var DateTimePicker = (function() {
 				}
 			});
 
-			// 组件面板内事件全部代理到parentNode
+			// 组件面板内事件全部代理到dtpNode
 			// 月份下拉框事件
 			dtpNode.on("change", $(self.get("headerMonth")), function(e) {
 
@@ -660,11 +663,12 @@ var DateTimePicker = (function() {
 			});
 
 			// 表格日期事件
-			$(self.get("dataCalendar")).on("click", "td", function(e) {
+			dtpNode.on("click", "td", function(e) {
+				//console.log(dtpNode);
 				var target = $(e.target);
 
 				// 将上次选中td的Class置空
-				$(self.get("dataCalendar")).find("td.selected-date").attr("class", "");
+				dtpNode.find("td.selected-date").attr("class", "");
 
 				target.attr("class", "selected-date");
 
@@ -675,8 +679,6 @@ var DateTimePicker = (function() {
 				var fullDate = target.attr("data-full-date");
 
 				// 更新start元素的值 
-				
-				console.log(dtpNode);
 				self.get("start").val(fullDate);
 				self.curShowDate = self.selectedDate = new Date(target.attr("data-year"), target.attr("data-month"), target.attr("data-date"));
 			});
