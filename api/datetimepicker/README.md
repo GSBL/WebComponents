@@ -1,8 +1,8 @@
 ## 综述
 
-Datetimepicker是一个日期和时间选择组件
+Datetimepicker是一个日期选择组件
 
-* 版本：1.0.1
+* 版本：1.0.0
 * 作者：rgb
 
 ## 依赖说明
@@ -37,29 +37,9 @@ Datetimepicker是一个日期和时间选择组件
         * `默认值2049`
         * 年下拉框的最大值
 
-### 全局事件响应
-| 控制台点击事件 | 描述 |    
-| ------------ | ------------- |
-| clickLastMonth | 日期导航，上个月按钮被点击 |
-| clickNextMonth | 日期导航，下个月按钮被点击 |
-| clickToday | 日期导航，今天按钮 |
-| changeYear | 日期导航，年的下拉选框值改变 |
-| changeMonth | 日期导航，月的下拉选框值改变 |
-
-| 组件点击时间 | 描述 |
-| ------------ | ------------- |
-| clickDate | 点选日期|
-| clickDateChange | 点选日期，并导致日期改变 |
-
-
-| 全局事件 | 描述 |
-| ------------ | ------------- |
-| hidePanel | 隐藏整个控件|
-| showPanel | 显示整个控件|
-
 
 * 内置方法
-    日期选择器模块 `DateTimePicker`
+    *日期选择器模块 `DateTimePicker`
         * setUp()
             * 功能：初始化组件
         * bind()
@@ -77,7 +57,7 @@ Datetimepicker是一个日期和时间选择组件
             * 参数：相关日期，`Date`类型
         * setPosition()
             * 功能：将组件模块定位到start元素下面
-    时间操作模块 `Moment`
+    *时间操作模块 `Moment`
         * changeDate(date, num, dateType)
             * 功能：按要求更改时间
             * 参数：date指被参照的时间，Date类型

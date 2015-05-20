@@ -248,10 +248,6 @@ var DateTimePicker = (function() {
 
 	Base = Base.extend({
 		/**
-		 * 配置项
-		 */
-		_options: {},
-		/**
 		 * 存放自动注册事件
 		 */
 		events: {},
@@ -263,17 +259,6 @@ var DateTimePicker = (function() {
 		 * init用于初始化属性
 		 */
 		init: function(options) {
-
-			// 更新配置项
-			// if (options) {
-			// 	for (var key in options) {
-			// 		if (options.hasOwnProperty(key)) {
-			// 			this._options[key] = options[key];
-			// 		}
-			// 	}
-			// } else {
-			// 	this._options = {};
-			// }
 			this._options = options ||{};
 			// 将events中的事件代理到parentNode
 			this._delegateEvent();
@@ -548,6 +533,14 @@ var DateTimePicker = (function() {
 				formatDate: 'YYYY-MM-DD',
 				yearStart: 1919,
 				yearEnd: 2049
+		},
+		init:function (options) {
+			for(var key in options){
+				if(options.hasOwnProperty(key)){
+					this._options[key] = options[key];
+				}
+			}
+			this.setUp();
 		},
 		// events:{
 		// 	".icon-h":{

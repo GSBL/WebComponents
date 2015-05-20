@@ -6,8 +6,6 @@ define(function(require, exports, module) {
 	// 混入事件监听模块
 	var Base = Class.extend(Event);
 	Base = Base.extend({
-		// 配置项
-		_options: {},
 		// 用于存放注册事件
 		events: "",
 		// 模板内容
