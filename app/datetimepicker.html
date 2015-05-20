@@ -6,17 +6,18 @@
 	<link rel="stylesheet" type="text/css" href="../static/datetimepicker/src/datetimepicker.css">
 </head>
 <body>
-	<label for="datetimepicker">Date</label>
-	<input type="text" id="datetimepicker" value="" />
-
-	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
+	<label for="datetimepicker">Date：</label>
+	<input type="text" id="datetimepicker1" value="2013-07-07" />
+	<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="../static/datetimepicker/src/datetimepicker.js"></script>
 	<script type="text/javascript">
-		$(
-			function(){
-				new DateTimePicker({value:new Date()});
-			}
-		)
+		$(function(){
+				var f=new DateTimePicker({
+					value:new Date(2013,6,5),
+					start:$("#datetimepicker1")
+				});
+				console.dir(f);
+			});
 	</script>
 </body>
 </html>
