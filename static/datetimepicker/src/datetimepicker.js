@@ -601,7 +601,7 @@ var DateTimePicker = (function() {
 			var self = this;
 
 			// 组件的事件代理到该节点下面
-			var parentNode = self.get("rgbDTP");
+			var parentNode = $(document.body);
 
 			// 显示组件事件
 			self.get("start").on("click", function() {
