@@ -62,15 +62,12 @@ Datetimepicker是一个日期选择组件
         * 参数：date指被参照的时间，Date类型
         * 参数：num指更改的幅度，Number类型，负数表示更改到date时间以前
         * 参数：dateType指更改的类型，0表示按天更改，1表示按月，2表示按年
-        * 返回值：更改后的时间，date类
     *changeDateByMonth(date,num)
         * 功能：按月份更改时间
         * 参数：同changeDate的对应参数
-        * 返回值：更改后的时间，date类型
     *changeDateByDate(date,num)
         * 功能：按天数更改时间
         * 参数：同changeDate的对应参数
-        * 返回值：更改后的时间，date类型
     *getMonthAllDays(date)
         * 功能：获取date时间所在月份的总天数
         * 返回值：月份天数，Number类型
