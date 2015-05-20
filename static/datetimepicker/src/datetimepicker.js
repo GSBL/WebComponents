@@ -527,69 +527,42 @@ var DateTimePicker = (function() {
 	var DateTimePicker = Base.extend(Moment);
 
 	DateTimePicker = DateTimePicker.extend({
-		_options: {
-				value: new Date(),
-				start: null,
-				formatDate: 'YYYY-MM-DD',
-				yearStart: 1919,
-				yearEnd: 2049
-		},
-		init:function (options) {
-			for(var key in options){
-				if(options.hasOwnProperty(key)){
-					this._options[key] = options[key];
-				}
-			}
-			this.setUp();
-		},
-		// events:{
-		// 	".icon-h":{
-		// 		click: function (self,e) {
-		// 			self.updatePanel(new Date());
-		// 		}
-		// 	},
-		// 	".icon-l":{
-		// 		click: function (self,e) {
-		// 			var curShowDate = self.curShowDate;
-		// 			var changedDate = self.changeDate(curShowDate,1,-1,1);
-		// 			self.updatePanel(changedDate);
-		// 		}
-		// 	},
-		// 	".icon-r":{
-		// 		click: function (self,e) {
-		// 			var curShowDate = self.curShowDate;
-		// 			var changedDate = self.changeDate(curShowDate,1,1,1);
-		// 			self.updatePanel(changedDate);
-		// 		}
-		// 	}
-		// },
 		/**
 		 * 组件模板
 		 */
-		template: '<div class="rgb-dtp <%= createTime %> " style="display:none;"><div class="dtp-date"><div class="date-header"><a title="上个月" class="icon icon-l">l</a><a class="icon icon-h" title="今天">h</a><select class="header-year"></select><select class="header-month"></select><a class="icon icon-r">r</a></div><div class="data-calendar"><table><thead><tr><th>周日</th><th>周一</th><th>周二</th><th>周三</th><th>周四</th><th>周五</th><th>周六</th></tr></thead><tbody></tbody></table></div></div></div>',
+		template: '<div class="rgb-dtp dtp-<%= createTime %> " style="display:none;"><div class="dtp-date"><div class="date-header"><a title="上个月" class="icon icon-l">l</a><a class="icon icon-h" title="今天">h</a><select class="header-year"></select><select class="header-month"></select><a class="icon icon-r">r</a></div><div class="data-calendar"><table><thead><tr><th>周日</th><th>周一</th><th>周二</th><th>周三</th><th>周四</th><th>周五</th><th>周六</th></tr></thead><tbody></tbody></table></div></div></div>',
 		/**
 		 * 真正的初始化操作
 		 */
 		setUp: function() {
 			var self = this;
 
-		 	// 配置项
-			
+		 	// 更新配置项
+			self._options = {
+				value: self.get("value") || new Date(),
+				start: self.get("start") || null,
+				formatDate: self.get("formatDate") || 'YYYY-MM-DD',
+				yearStart: self.get("yearStart") || 1919,
+				yearEnd: self.get("yearEnd") || 2049
+			};
+
 			// 设置已选中日期，默认为当天日期
 			self.selectedDate = self.unformatDate(self.get("start").val(), self.get("formatDate")) || self.get("value");
 			self.curShowDate = self.selectedDate;
+			self.set("value",self.selectedDate);
 
+			self.createTime = new Date().getTime();
 			// 渲染摸板
-			self.render({"createTime":new Date().getTime()});
+			self.render({"createTime":self.createTime});
 
-			// 储存相关节点，以便其他函数调用
-			self.set("rgbDTP", $(".rgb-dtp"));
-			self.set("iconH", $(".icon-h"));
-			self.set("iconL", $(".icon-l"));
-			self.set("iconR", $(".icon-r"));
-			self.set("headerYear", $(".header-year"));
-			self.set("headerMonth", $(".header-month"));
-			self.set("dataCalendar", $(".data-calendar"));
+			// 储存相关节点类名，以便其他函数调用
+			self.set("rgbDTP", ".rgb-dtp");
+			self.set("iconH", ".icon-h");
+			self.set("iconL", ".icon-l");
+			self.set("iconR", ".icon-r");
+			self.set("headerYear", ".header-year");
+			self.set("headerMonth", ".header-month");
+			self.set("dataCalendar", ".data-calendar");
 
 			// 绑定事件
 			self.bind();
@@ -601,13 +574,13 @@ var DateTimePicker = (function() {
 			var self = this;
 
 			// 组件的事件代理到该节点下面
-			var parentNode = $(document.body);
+			var dtpNode = $(".dtp-"+self.createTime);
 
 			// 显示组件事件
 			self.get("start").on("click", function() {
 
 				//显示组件
-				self.get("rgbDTP").attr("class", "rgb-dtp dtp-" + new Date().getTime()).show();
+				 dtpNode.show();
 
 				// 标记组件已显示
 				self.isShowed = true;
@@ -621,49 +594,50 @@ var DateTimePicker = (function() {
 
 			// 关闭组件事件
 			$(document).on("click", function(e) {
-				var target = e.target,
+				var target = e.target;
+
 					// 查找事件目标的父节点时候有rgbDTP节点，并使用$()[0]方法获取相应DOM元素
-					targetParent = $(target).parents(".rgb-dtp")[0];
+				var	targetParent = $(target).parents(".rgb-dtp")[0];
 
 				// 如果组件已经显示并且事件目标不为start节点，同时事件目标的父节点不包含rgbDTP节点，则关闭组件
-				if (self.isShowed === true && target != self.get("start")[0] && targetParent != self.get("rgbDTP")[0]) {
-					self.get("rgbDTP").hide();
+				if (self.isShowed === true && target != self.get("start")[0] && targetParent != $(self.get("rgbDTP"))[0]) {
+					dtpNode.hide();
 					self.isShowed === false;
 				}
 			});
 
 			// 组件面板内事件全部代理到parentNode
 			// 月份下拉框事件
-			parentNode.on("change", ".header-month", function(e) {
+			dtpNode.on("change", $(self.get("headerMonth")), function(e) {
 
 				// 截取已选中的option的class属性以获取选中月份
-				var selectedCls = $(this).find("option:selected").attr("class"),
+				var selectedCls = $(this).find(".header-month option:selected").attr("class"),
 					selected = selectedCls.substring(9);
 
 				// 改变月份后的时间
 				var changedDate = new Date(self.curShowDate.getFullYear(), selected);
-
+				
 				var fillDate = self.fillDate(changedDate);
-				self.get("dataCalendar").find("tbody").html(fillDate);
+				$(self.get("dataCalendar")).find("tbody").html(fillDate);
 
 				//更新当前显示时间
 				self.curShowDate = changedDate;
 			});
 
 			// 年份下拉框事件
-			parentNode.on("change", ".header-year", function(e) {
+			dtpNode.on("change", $(self.get("headerYear")), function(e) {
 				var selected = $(this).val();
 
 				var changedDate = new Date(selected, self.curShowDate.getMonth());
 
 				var fillDate = self.fillDate(changedDate);
-				self.get("dataCalendar").find("tbody").html(fillDate);
+				$(self.get("dataCalendar")).find("tbody").html(fillDate);
 
 				self.curShowDate = changedDate;
 			});
 
 			// 上一个月按钮事件
-			parentNode.on("click", ".icon-l", function(e) {
+			dtpNode.on("click", self.get("iconL"), function(e) {
 				var curShowDate = self.curShowDate;
 
 				var changedDate = self.changeDateByMonth(curShowDate, -1);
@@ -672,7 +646,7 @@ var DateTimePicker = (function() {
 			});
 
 			// 下一个月按钮事件
-			parentNode.on("click", ".icon-r", function(e) {
+			dtpNode.on("click", self.get("iconR"), function(e) {
 				var curShowDate = self.curShowDate;
 
 				var changedDate = self.changeDateByMonth(curShowDate, 1);
@@ -681,28 +655,29 @@ var DateTimePicker = (function() {
 			});
 
 			// 主页按钮事件，显示今天日期
-			parentNode.on("click", ".icon-h", function(e) {
+			dtpNode.on("click", self.get("iconH"), function(e) {
 				self.updatePanel(new Date());
 			});
 
 			// 表格日期事件
-			self.get("dataCalendar").on("click", "td", function(e) {
+			$(self.get("dataCalendar")).on("click", "td", function(e) {
 				var target = $(e.target);
 
 				// 将上次选中td的Class置空
-				self.get("dataCalendar").find("td.selected-date").attr("class", "");
+				$(self.get("dataCalendar")).find("td.selected-date").attr("class", "");
 
 				target.attr("class", "selected-date");
 
-				self.get("rgbDTP").hide();
+				dtpNode.hide();
 
 				self.isShowed === false;
 
 				var fullDate = target.attr("data-full-date");
 
 				// 更新start元素的值 
+				
+				console.log(dtpNode);
 				self.get("start").val(fullDate);
-
 				self.curShowDate = self.selectedDate = new Date(target.attr("data-year"), target.attr("data-month"), target.attr("data-date"));
 			});
 		},
@@ -714,15 +689,15 @@ var DateTimePicker = (function() {
 
 			// 渲染年份
 			var fillYear = self.fillSelect(0, "year-op-" + initDate.getFullYear());
-			self.get("headerYear").html(fillYear);
+			$(self.get("headerYear")).html(fillYear);
 
 			// 渲染月份
 			var fillMonth = self.fillSelect(1, "month-op-" + initDate.getMonth());
-			self.get("headerMonth").html(fillMonth);
+			$(self.get("headerMonth")).html(fillMonth);
 
 			// 渲染日期
 			var fillDate = self.fillDate(initDate);
-			self.get("dataCalendar").find("tbody").html(fillDate);
+			$(self.get("dataCalendar")).find("tbody").html(fillDate);
 
 			self.curShowDate = initDate;
 		},
@@ -847,7 +822,7 @@ var DateTimePicker = (function() {
 			var startOffset = startElem.offset();
 
 			//  根据start元素定位及其高度对组件定位
-			self.get("rgbDTP").css({
+			$(self.get("rgbDTP")).css({
 				'position': 'absolute',
 				'top': parseFloat(startOffset.top) + parseFloat(startElem.height()) + 5 + 'px',
 				'left': parseFloat(startOffset.left) + 'px',
