@@ -39,54 +39,53 @@ Datetimepicker是一个日期选择组件
 
 
 * 内置方法
-    *日期选择器模块 `DateTimePicker`
-        * setUp()
-            * 功能：初始化组件
-        * bind()
-            * 功能：绑定相应事件
-        * updatePanel(initDate)
-            * 功能：更新并渲染整个组件面板
-            * 参数：相关日期，`Date`类型
-        * fillSelect(type,selectedClass)
-            * 功能：获取待渲染的select标签内容
-            * 参数：type表示下拉框类型，Number类型，1表示月份，0表示年份
-            * 参数：selectedClass表示被选中元素的class，`String`类型
-            * 返回值：下拉框中option内容，`String`类型
-        * fillDate(initDate)
-            * 功能：获取待渲染的日期内容(table 中的内容)
-            * 参数：相关日期，`Date`类型
-        * setPosition()
-            * 功能：将组件模块定位到start元素下面
-    *时间操作模块 `Moment`
-        * changeDate(date, num, dateType)
-            * 功能：按要求更改时间
-            * 参数：date指被参照的时间，Date类型
-            * 参数：num指更改的幅度，Number类型，负数表示更改到date时间以前
-            * 参数：dateType指更改的类型，0表示按天更改，1表示按月更改，2表示按年更改
-            * 返回值：更改后的时间，date类型
-        *changeDateByMonth(date,num)
-            * 功能：按月份更改时间
-            * 参数：同changeDate的对应参数
-            * 返回值：更改后的时间，date类型
-        *changeDateByDate(date,num)
-            * 功能：按天数更改时间
-            * 参数：同changeDate的对应参数
-            * 返回值：更改后的时间，date类型
-        *getMonthAllDays(date)
-            * 功能：获取date时间所在月份的总天数
-            * 返回值：月份天数，Number类型
-        *isLeapYear(year)
-            * 功能：是否为润年
-        *formatDate(date,fmt)
-            * 功能：将时间date按照格式fmt进行格式化
-            * 参数：date指待格式化的时间，Date类型
-            * 参数：fmt指格式化后的样式，String类型
-            * 返回值：被格式化后的时间，String类型
-        *unformatDate(str,fmt)
-            * 功能：执行格式化的逆操作
-            * 参数：str指已格式化的字符串，String类型
-            * 参数：fmt指格式化的样式，String类型
-            * 返回值：还原后的时间，date类型
+    * setUp()
+        * 功能：初始化组件
+    * bind()
+        * 功能：绑定相应事件
+    * updatePanel(initDate)
+        * 功能：更新并渲染整个组件面板
+        * 参数：相关日期，`Date`类型
+    * fillSelect(type,selectedClass)
+        * 功能：获取待渲染的select标签内容
+        * 参数：type表示下拉框类型，Number类型，1表示月份，0表示年份
+        * 参数：selectedClass表示被选中元素的class，`String`类型
+        * 返回值：下拉框中option内容，`String`类型
+    * fillDate(initDate)
+        * 功能：获取待渲染的日期内容(table 中的内容)
+        * 参数：相关日期，`Date`类型
+    * setPosition()
+        * 功能：将组件模块定位到start元素下面
+            
+    * changeDate(date, num, dateType)
+        * 功能：按要求更改时间
+        * 参数：date指被参照的时间，Date类型
+        * 参数：num指更改的幅度，Number类型，负数表示更改到date时间以前
+        * 参数：dateType指更改的类型，0表示按天更改，1表示按月更改，2表示按年更改
+        * 返回值：更改后的时间，date类型
+    *changeDateByMonth(date,num)
+        * 功能：按月份更改时间
+        * 参数：同changeDate的对应参数
+        * 返回值：更改后的时间，date类型
+    *changeDateByDate(date,num)
+        * 功能：按天数更改时间
+        * 参数：同changeDate的对应参数
+        * 返回值：更改后的时间，date类型
+    *getMonthAllDays(date)
+        * 功能：获取date时间所在月份的总天数
+        * 返回值：月份天数，Number类型
+    *isLeapYear(year)
+        * 功能：是否为润年
+    *formatDate(date,fmt)
+        * 功能：将时间date按照格式fmt进行格式化
+        * 参数：date指待格式化的时间，Date类型
+        * 参数：fmt指格式化后的样式，String类型
+        * 返回值：被格式化后的时间，String类型
+    *unformatDate(str,fmt)
+        * 功能：执行格式化的逆操作
+        * 参数：str指已格式化的字符串，String类型
+        * 参数：fmt指格式化的样式，String类型
+        * 返回值：还原后的时间，date类型
 
 * 基本样式
     * 组件最外层className `ks-dtp`
