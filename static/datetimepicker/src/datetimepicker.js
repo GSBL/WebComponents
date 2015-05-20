@@ -265,16 +265,16 @@ var DateTimePicker = (function() {
 		init: function(options) {
 
 			// 更新配置项
-			if (options) {
-				for (var key in options) {
-					if (options.hasOwnProperty(key)) {
-						this._options[key] = options[key];
-					}
-				}
-			} else {
-				this._options = {};
-			}
-
+			// if (options) {
+			// 	for (var key in options) {
+			// 		if (options.hasOwnProperty(key)) {
+			// 			this._options[key] = options[key];
+			// 		}
+			// 	}
+			// } else {
+			// 	this._options = {};
+			// }
+			this._options = options ||{};
 			// 将events中的事件代理到parentNode
 			this._delegateEvent();
 
@@ -542,6 +542,13 @@ var DateTimePicker = (function() {
 	var DateTimePicker = Base.extend(Moment);
 
 	DateTimePicker = DateTimePicker.extend({
+		_options: {
+				value: new Date(),
+				start: null,
+				formatDate: 'YYYY-MM-DD',
+				yearStart: 1919,
+				yearEnd: 2049
+		},
 		// events:{
 		// 	".icon-h":{
 		// 		click: function (self,e) {
@@ -574,15 +581,10 @@ var DateTimePicker = (function() {
 			var self = this;
 
 		 	// 配置项
-			self._options = {
-				value: new Date(),
-				start: null,
-				formatDate: 'YYYY-MM-DD',
-				yearStart: 1919,
-				yearEnd: 2049
-			};
+			
 			// 设置已选中日期，默认为当天日期
 			self.selectedDate = self.unformatDate(self.get("start").val(), self.get("formatDate")) || self.get("value");
+			self.curShowDate = self.selectedDate;
 
 			// 渲染摸板
 			self.render();
