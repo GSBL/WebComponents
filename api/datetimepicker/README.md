@@ -18,7 +18,7 @@ Datetimepicker是一个日期选择组件
 ## API说明
 
 ### 初始化配置项
-
+```
 * 配置项为object，内部参数如下
     * value 
         * `默认值''`
@@ -85,7 +85,7 @@ Datetimepicker是一个日期选择组件
         * 参数：str指已格式化的字符串，String类型
         * 参数：fmt指格式化的样式，String类型
         * 返回值：还原后的时间，Date类型
-
+```
 * 基本样式
     * 组件最外层className `ks-dtp`
     * 日历组件最外层className `dtp-date`
