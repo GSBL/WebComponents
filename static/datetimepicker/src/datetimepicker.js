@@ -84,9 +84,9 @@ var DateTimePicker = (function() {
 			// 截取已选中的option的class属性以获取选中月份
 			var selectedCls = $(this).find("option:selected").attr("class");
 			var selected = selectedCls.substring(9);
-
+			var selectedDate = self.selectedDate;
 			// 改变月份后的时间
-			var changedDate = new Date(self.selectedDate.getFullYear(), selected);
+			var changedDate = new Date(selectedDate.getFullYear(), selected, selectedDate.getDate());
 
 			self.render(changedDate);
 			self.selectedDate = changedDate;
@@ -95,7 +95,8 @@ var DateTimePicker = (function() {
 		// 年份下拉框事件
 		dtpNode.on("change", ".header-year", function(e) {
 			var selected = $(this).val();
-			var changedDate = new Date(selected, self.selectedDate.getMonth());
+			var selectedDate =self.selectedDate;
+			var changedDate = new Date(selected, selectedDate.getMonth(), selectedDate.getDate());
 
 			self.render(changedDate);
 			self.selectedDate = changedDate;
@@ -103,7 +104,7 @@ var DateTimePicker = (function() {
 
 		// 上一个月按钮事件
 		dtpNode.on("click", ".icon-l", function(e) {
-			var changedDate = changeDateByMonth(selectedDate, -1);
+			var changedDate = changeDateByMonth(self.selectedDate, -1);
 
 			self.render(changedDate);
 			self.selectedDate = changedDate;
@@ -111,7 +112,7 @@ var DateTimePicker = (function() {
 
 		// 下一个月按钮事件
 		dtpNode.on("click", ".icon-r", function(e) {
-			var changedDate = changeDateByMonth(selectedDate, 1);
+			var changedDate = changeDateByMonth(self.selectedDate, 1);
 
 			self.render(changedDate);
 			self.selectedDate = changedDate;
@@ -119,7 +120,9 @@ var DateTimePicker = (function() {
 
 		// 主页按钮事件，显示今天日期
 		dtpNode.on("click", ".icon-h", function(e) {
-			self.render(new Date());
+			var changedDate = new Date();
+
+			self.render(changedDate);
 			self.selectedDate = changedDate;
 		});
 
@@ -152,7 +155,6 @@ var DateTimePicker = (function() {
 
 		var curYear = initDate.getFullYear();
 		var curMonth = initDate.getMonth();
-		var curDate = initDate.getDate();
 		var FirstDay = new Date(curYear, curMonth, 1); // 一个月第一天
 		var WeekOfFirstDay = FirstDay.getDay(); // 一个月第一天的星期数
 		var preMonth = curMonth == 0 ? 11 : (curMonth - 1);
@@ -174,7 +176,7 @@ var DateTimePicker = (function() {
 			tmpDate = tmpInitDate.getDate();
 
 			if (tmpMonth === curMonth) {
-				dateCls = curDate === tmpDate ? "selected-date" : "";
+				dateCls = self.selectedDate.getDate() === tmpDate ? "selected-date" : "";
 			} else {
 				dateCls = "other-month-day";
 			}
@@ -212,7 +214,7 @@ var DateTimePicker = (function() {
 
 		var lastSelected = yearSelect.find("option:selected");
 		var curSelected = yearSelect.find(".year-op-" + curYear);
-		if (lastSelected !== curSelected) {
+		if (lastSelected != curSelected) {
 			lastSelected.removeAttr("selected");
 			curSelected.attr("selected", "selected");
 		}
@@ -231,7 +233,7 @@ var DateTimePicker = (function() {
 
 		lastSelected = monthSelect.find("option:selected");
 		curSelected = monthSelect.find(".month-op-" + curMonth);
-		if (lastSelected !== curSelected) {
+		if (lastSelected != curSelected) {
 			lastSelected.removeAttr("selected");
 			curSelected.attr("selected", "selected");
 		}
