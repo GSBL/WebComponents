@@ -62,7 +62,10 @@ js部分
         * 返回值：组件节点
     * setPosition()
         * 功能：将组件模块定位到start元素下面
-* 辅助方法         
+* 辅助方法 
+    * init(opts)
+        * 功能：初始化组件
+        * 参数：opts设置项        
     *changeDateByMonth(date,num)
         * 功能：按月份更改时间
         * 参数：同changeDate的对应参数
@@ -84,7 +87,7 @@ js部分
     *mix(s,r)
         * 将对象s上的属性合并到对象r上
         *返回值：合并后的S对象
-        
+
 * 基本样式
     * 组件最外层className `ks-dtp`
     * 日历组件最外层className `dtp-date`
