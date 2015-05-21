@@ -63,28 +63,25 @@ js部分
     * setPosition()
         * 功能：将组件模块定位到start元素下面
 * 辅助方法 
-    * init(opts)
-        * 功能：初始化组件
-        * 参数：opts设置项        
-    *changeDateByMonth(date,num)
+    * changeDateByMonth(date,num)
         * 功能：按月份更改时间
-        * 参数：同changeDate的对应参数
+        * 参数：date指被参照时间，num指更改的幅度，负数表示向前
         * 返回值：更改后的时间，date类型
-    *changeDateByDate(date,num)
+    * changeDateByDate(date,num)
         * 功能：按天数更改时间
-        * 参数：同changeDate的对应参数
+        * 参数：date指被参照时间，num指更改的幅度，负数表示向前
         * 返回值：更改后的时间，date类型
-    *formatDate(date,fmt)
+    * formatDate(date,fmt)
         * 功能：将时间date按照格式fmt进行格式化
         * 参数：date指待格式化的时间，Date类型
         * 参数：fmt指格式化后的样式，String类型
         * 返回值：被格式化后的时间，String类型
-    *unformatDate(str,fmt)
+    * unformatDate(str,fmt)
         * 功能：执行格式化的逆操作
         * 参数：str指已格式化的字符串，String类型
         * 参数：fmt指格式化的样式，String类型
         * 返回值：还原后的时间，Date类型
-    *mix(s,r)
+    * mix(s,r)
         * 将对象s上的属性合并到对象r上
         *返回值：合并后的S对象
 
