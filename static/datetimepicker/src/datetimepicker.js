@@ -24,7 +24,7 @@ var DateTimePicker = (function() {
 		// 组件被选中的时间
 		this.selectedDate = "";
 
-		//	用于存放组件节点
+		// 用于存放组件节点
 		this.dtpNode = null;
 
 		this.init(opts);
