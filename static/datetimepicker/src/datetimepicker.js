@@ -151,21 +151,21 @@ var DateTimePicker = (function() {
 		var dtpNode = self.dtpNode;
 
 		var curYear = initDate.getFullYear();
-		var	curMonth = initDate.getMonth();
-		var	curDate = initDate.getDate();
-		var	FirstDay = new Date(curYear, curMonth, 1); // 一个月第一天
-		var	WeekOfFirstDay = FirstDay.getDay(); // 一个月第一天的星期数
-		var	preMonth = curMonth == 0 ? 11 : (curMonth - 1);
-		var	nextMonth = curMonth == 11 ? 0 : (curMonth + 1);
+		var curMonth = initDate.getMonth();
+		var curDate = initDate.getDate();
+		var FirstDay = new Date(curYear, curMonth, 1); // 一个月第一天
+		var WeekOfFirstDay = FirstDay.getDay(); // 一个月第一天的星期数
+		var preMonth = curMonth == 0 ? 11 : (curMonth - 1);
+		var nextMonth = curMonth == 11 ? 0 : (curMonth + 1);
 
 		// 获取第一个td显示日期
 		var tmpInitDate = changeDateByDay(FirstDay, -WeekOfFirstDay);
-		var	tmpMonth = tmpInitDate.getMonth();
-		var	tmpYear = tmpInitDate.getFullYear();
-		var	tmpDay = tmpInitDate.getDate();
+		var tmpMonth = tmpInitDate.getMonth();
+		var tmpYear = tmpInitDate.getFullYear();
+		var tmpDay = tmpInitDate.getDate();
 
 		var dateCls = "other-month-day";
-		var	count = 0;
+		var count = 0;
 
 		// 渲染日期
 		while (tmpMonth === preMonth || tmpMonth === curMonth || tmpMonth === nextMonth) {
