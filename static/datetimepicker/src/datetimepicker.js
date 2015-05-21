@@ -69,7 +69,7 @@ var DateTimePicker = (function() {
 			var target = e.target;
 
 			// 查找事件目标的父节点时候有dtpNode节点，并使用$()[0]方法获取相应DOM元素
-			var targetParent = $(target).parents("."+dtpNode.attr("class").substring(8))[0];
+			var targetParent = $(target).parents("." + dtpNode.attr("class").substring(8))[0];
 
 			// 如果组件已经显示并且事件目标不为start节点，同时事件目标的父节点不包含dtpNode节点，则关闭组件
 			if (self.isShowed === true && target != selfOpts.start[0] && targetParent != dtpNode[0]) {
@@ -93,7 +93,7 @@ var DateTimePicker = (function() {
 		});
 
 		// 年份下拉框事件
-		dtpNode.on("change",".header-year", function(e) {
+		dtpNode.on("change", ".header-year", function(e) {
 			var selected = $(this).val();
 			var changedDate = new Date(selected, self.selectedDate.getMonth());
 
@@ -103,7 +103,7 @@ var DateTimePicker = (function() {
 
 		// 上一个月按钮事件
 		dtpNode.on("click", ".icon-l", function(e) {
-			var changedDate = changeDateByMonth(selectedDate,-1);
+			var changedDate = changeDateByMonth(selectedDate, -1);
 
 			self.render(changedDate);
 			self.selectedDate = changedDate;
@@ -111,7 +111,7 @@ var DateTimePicker = (function() {
 
 		// 下一个月按钮事件
 		dtpNode.on("click", ".icon-r", function(e) {
-			var changedDate = changeDateByMonth(selectedDate,1);
+			var changedDate = changeDateByMonth(selectedDate, 1);
 
 			self.render(changedDate);
 			self.selectedDate = changedDate;
@@ -154,87 +154,87 @@ var DateTimePicker = (function() {
 			curMonth = initDate.getMonth(),
 			curDate = initDate.getDate(),
 			FirstDay = new Date(curYear, curMonth, 1), // 一个月第一天
-			WeekOfFirstDay = FirstDay.getDay(),// 一个月第一天的星期数
+			WeekOfFirstDay = FirstDay.getDay(), // 一个月第一天的星期数
 			preMonth = curMonth == 0 ? 11 : (curMonth - 1),
 			nextMonth = curMonth == 11 ? 0 : (curMonth + 1);
 
 		// 获取第一个td显示日期
-		var tmpInitDate = changeDateByDay(FirstDay,-WeekOfFirstDay),
+		var tmpInitDate = changeDateByDay(FirstDay, -WeekOfFirstDay),
 			tmpMonth = tmpInitDate.getMonth(),
 			tmpYear = tmpInitDate.getFullYear(),
-            tmpDay = tmpInitDate.getDate();
-	
+			tmpDay = tmpInitDate.getDate();
+
 		var dateCls = "other-month-day",
 			count = 0;
 
 		// 渲染日期
-		while(tmpMonth === preMonth || tmpMonth === curMonth || tmpMonth === nextMonth){
+		while (tmpMonth === preMonth || tmpMonth === curMonth || tmpMonth === nextMonth) {
 			tmpMonth = tmpInitDate.getMonth();
 			tmpYear = tmpInitDate.getFullYear();
-            tmpDate = tmpInitDate.getDate();
+			tmpDate = tmpInitDate.getDate();
 
-            if(tmpMonth === curMonth){
-            	dateCls = curDate === tmpDate ? "selected-date" : "";
-            }else{
-            	dateCls = "other-month-day";
-            }
-            tbody += '<td data-date="' + tmpDate + '" data-month="' + tmpMonth +
-            '" data-year="' + tmpYear + '" class="' + dateCls + '" data-full-date="' + formatDate(tmpInitDate,selfOpts.formatDate) +
-            '" data-index="' + count + '">' + tmpDate + '</td>';
-            if(tmpInitDate.getDay() === 6){
-            	tbody += "</tr>";
-            }
+			if (tmpMonth === curMonth) {
+				dateCls = curDate === tmpDate ? "selected-date" : "";
+			} else {
+				dateCls = "other-month-day";
+			}
+			tbody += '<td data-date="' + tmpDate + '" data-month="' + tmpMonth +
+				'" data-year="' + tmpYear + '" class="' + dateCls + '" data-full-date="' + formatDate(tmpInitDate, selfOpts.formatDate) +
+				'" data-index="' + count + '">' + tmpDate + '</td>';
+			if (tmpInitDate.getDay() === 6) {
+				tbody += "</tr>";
+			}
 
-            // 日期往后加一天
-            tmpInitDate = changeDateByDay(tmpInitDate,1);
-            tmpMonth = tmpInitDate.getMonth();
+			// 日期往后加一天
+			tmpInitDate = changeDateByDay(tmpInitDate, 1);
+			tmpMonth = tmpInitDate.getMonth();
 
 			// 如果到了下个月，且星期为0，且超过了3行，就结束循环
-            if(tmpMonth === nextMonth && count > 27 && tmpInitDate.getDay()===0) {
-           		 break;
-            }
-            count ++;
+			if (tmpMonth === nextMonth && count > 27 && tmpInitDate.getDay() === 0) {
+				break;
+			}
+			count++;
 		}
 
 		dtpNode.find(".data-calendar tbody").html(tbody);
 
 		// 渲染年份
 		var yearSelect = dtpNode.find(".header-year");
-        var created = yearSelect.find("option");
-        if(!created[0]){
-            var tmpStr = '';
-	        var end = selfOpts.yearEnd;
-	        for(var i = selfOpts.yearStart; i <= end; i++) {
-	            tmpStr += '<option value="' + i + '" class="year-op-' + i + '">' + i + '</option>';
-	        }
-	        yearSelect.html(tmpStr);
-        }
+		var created = yearSelect.find("option");
+		if (!created[0]) {
+			var tmpStr = '';
+			var end = selfOpts.yearEnd;
+			for (var i = selfOpts.yearStart; i <= end; i++) {
+				tmpStr += '<option value="' + i + '" class="year-op-' + i + '">' + i + '</option>';
+			}
+			yearSelect.html(tmpStr);
+		}
 
-        var lastSelected = yearSelect.find("option:selected");
-        var curSelected = yearSelect.find(".year-op-"+curYear);
-        if(lastSelected !== curSelected){
-        	lastSelected.removeAttr("selected");
-        	curSelected.attr("selected","selected");
-        }
+		var lastSelected = yearSelect.find("option:selected");
+		var curSelected = yearSelect.find(".year-op-" + curYear);
+		if (lastSelected !== curSelected) {
+			lastSelected.removeAttr("selected");
+			curSelected.attr("selected", "selected");
+		}
 
-        // 渲染月份
-        var monthSelect = dtpNode.find(".header-month");
-        var created = monthSelect.find("option");
-        if(!created[0]){
-            var tmpStr = '';
-	        var monthSelectArr = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
-	        for(var i = 0,len = monthSelectArr.length ; i < len; i++) {
-	            tmpStr += '<option value="' + monthSelectArr[i] + '" class="month-op-' + i + '">' + monthSelectArr[i] + '</option>';
-	        }
-	        monthSelect.html(tmpStr);
-        }
+		// 渲染月份
+		var monthSelect = dtpNode.find(".header-month");
+		var created = monthSelect.find("option");
+		if (!created[0]) {
+			var tmpStr = '';
+			var monthSelectArr = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
+			for (var i = 0, len = monthSelectArr.length; i < len; i++) {
+				tmpStr += '<option value="' + monthSelectArr[i] + '" class="month-op-' + i + '">' + monthSelectArr[i] + '</option>';
+			}
+			monthSelect.html(tmpStr);
+		}
 
-       	lastSelected = monthSelect.find("option:selected");
-        curSelected = monthSelect.find(".month-op-"+curMonth);
-        if(lastSelected !== curSelected){
-        	lastSelected.removeAttr("selected");
-        	curSelected.attr("selected","selected");
-        }
+		lastSelected = monthSelect.find("option:selected");
+		curSelected = monthSelect.find(".month-op-" + curMonth);
+		if (lastSelected !== curSelected) {
+			lastSelected.removeAttr("selected");
+			curSelected.attr("selected", "selected");
+		}
 
 	}
 	/**
@@ -253,9 +253,9 @@ var DateTimePicker = (function() {
 	/**
 	 * 定位组件
 	 */
-	DateTimePicker.prototype.setPosition= function() {
+	DateTimePicker.prototype.setPosition = function() {
 		var self = this;
-		var selfOpts =self._options;
+		var selfOpts = self._options;
 		var startElem = selfOpts.start;
 		if (!startElem) {
 			throw "start 参数不能为空";
@@ -279,6 +279,7 @@ var DateTimePicker = (function() {
 	/**
 	 * 按天变更时间，num表示天数，负数表示向前
 	 */
+
 	function changeDateByDay(date, num) {
 		if (!date) {
 			return;
@@ -287,11 +288,12 @@ var DateTimePicker = (function() {
 		num = num || 0;
 
 		return new Date(date.getFullYear(), date.getMonth(), date.getDate() + num);
-	
+
 	}
 	/**
 	 * 按月变更时间，num表示月数，负数表示向前
 	 */
+
 	function changeDateByMonth(date, num) {
 		if (!date) {
 			return;
@@ -300,11 +302,12 @@ var DateTimePicker = (function() {
 		num = num || 0;
 
 		return new Date(date.getFullYear(), date.getMonth() + num, date.getDate());
-	
+
 	}
 	/**
 	 * 格式化日期
 	 */
+
 	function formatDate(date, fmt) {
 		fmt = fmt || "YYYY-MM-DD";
 
@@ -328,6 +331,7 @@ var DateTimePicker = (function() {
 	/**
 	 * 将已经格式化的时间字符串转化为时间格式
 	 */
+
 	function unformatDate(str, fmt) {
 		if (!str) {
 			return;
@@ -341,6 +345,7 @@ var DateTimePicker = (function() {
 	/**
 	 * 将对象s上的属性合并到对象r上
 	 */
+
 	function mix(s, r) {
 		for (var k in r) {
 			if (r.hasOwnProperty(k)) {
