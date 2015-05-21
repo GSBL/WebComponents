@@ -577,7 +577,6 @@ var DateTimePicker = (function() {
 
 			// 组件的事件代理到该节点下面
 			var dtpNode = $(self.get("dtpNode"));
-			// console.log(dtpNode)
 
 			// 显示组件事件
 			self.get("start").on("click", function() {
@@ -598,12 +597,12 @@ var DateTimePicker = (function() {
 			// 关闭组件事件
 			$(document).on("click", function(e) {
 				var target = e.target;
-
-					// 查找事件目标的父节点时候有rgbDTP节点，并使用$()[0]方法获取相应DOM元素
-				var	targetParent = $(target).parents(".rgb-dtp")[0];
+				
+				// 查找事件目标的父节点时候有rgbDTP节点，并使用$()[0]方法获取相应DOM元素
+				var	targetParent = $(target).parents(".dtp-"+self.createTime)[0];
 
 				// 如果组件已经显示并且事件目标不为start节点，同时事件目标的父节点不包含rgbDTP节点，则关闭组件
-				if (self.isShowed === true && target != self.get("start")[0] && targetParent != $(self.get("rgbDTP"))[0]) {
+				if (self.isShowed === true && target != self.get("start")[0] && targetParent != $(".dtp-"+self.createTime)[0]) {
 					dtpNode.hide();
 					self.isShowed === false;
 				}
@@ -664,7 +663,6 @@ var DateTimePicker = (function() {
 
 			// 表格日期事件
 			dtpNode.on("click", "td", function(e) {
-				//console.log(dtpNode);
 				var target = $(e.target);
 
 				// 将上次选中td的Class置空
@@ -824,7 +822,7 @@ var DateTimePicker = (function() {
 			var startOffset = startElem.offset();
 
 			//  根据start元素定位及其高度对组件定位
-			$(self.get("rgbDTP")).css({
+			$(".dtp-"+self.createTime).css({
 				'position': 'absolute',
 				'top': parseFloat(startOffset.top) + parseFloat(startElem.height()) + 5 + 'px',
 				'left': parseFloat(startOffset.left) + 'px',
