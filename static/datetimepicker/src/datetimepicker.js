@@ -82,8 +82,8 @@ var DateTimePicker = (function() {
 		// 月份下拉框事件
 		dtpNode.on("change", ".header-month", function(e) {
 			// 截取已选中的option的class属性以获取选中月份
-			var selectedCls = $(this).find("option:selected").attr("class"),
-				selected = selectedCls.substring(9);
+			var selectedCls = $(this).find("option:selected").attr("class");
+			var selected = selectedCls.substring(9);
 
 			// 改变月份后的时间
 			var changedDate = new Date(self.selectedDate.getFullYear(), selected);
@@ -150,22 +150,22 @@ var DateTimePicker = (function() {
 		var tbody = "<tr>";
 		var dtpNode = self.dtpNode;
 
-		var curYear = initDate.getFullYear(),
-			curMonth = initDate.getMonth(),
-			curDate = initDate.getDate(),
-			FirstDay = new Date(curYear, curMonth, 1), // 一个月第一天
-			WeekOfFirstDay = FirstDay.getDay(), // 一个月第一天的星期数
-			preMonth = curMonth == 0 ? 11 : (curMonth - 1),
-			nextMonth = curMonth == 11 ? 0 : (curMonth + 1);
+		var curYear = initDate.getFullYear();
+		var	curMonth = initDate.getMonth();
+		var	curDate = initDate.getDate();
+		var	FirstDay = new Date(curYear, curMonth, 1); // 一个月第一天
+		var	WeekOfFirstDay = FirstDay.getDay(); // 一个月第一天的星期数
+		var	preMonth = curMonth == 0 ? 11 : (curMonth - 1);
+		var	nextMonth = curMonth == 11 ? 0 : (curMonth + 1);
 
 		// 获取第一个td显示日期
-		var tmpInitDate = changeDateByDay(FirstDay, -WeekOfFirstDay),
-			tmpMonth = tmpInitDate.getMonth(),
-			tmpYear = tmpInitDate.getFullYear(),
-			tmpDay = tmpInitDate.getDate();
+		var tmpInitDate = changeDateByDay(FirstDay, -WeekOfFirstDay);
+		var	tmpMonth = tmpInitDate.getMonth();
+		var	tmpYear = tmpInitDate.getFullYear();
+		var	tmpDay = tmpInitDate.getDate();
 
-		var dateCls = "other-month-day",
-			count = 0;
+		var dateCls = "other-month-day";
+		var	count = 0;
 
 		// 渲染日期
 		while (tmpMonth === preMonth || tmpMonth === curMonth || tmpMonth === nextMonth) {
