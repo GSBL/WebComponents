@@ -10,12 +10,7 @@
    |-- api              存放各个组件api文件
    |    |-- datetimepicker
    |    `-- time-meter
-   |-- app              存放 html 等文件
-   |      |-- datetimepicker.html
-   |      `-- time-meter.html
-   |
-   `-- index.html
+   `-- app              存放 html 等文件
+         |-- datetimepicker.html
+         `-- time-meter.html
 ```
-## demo页面
-
-http://gsbl.github.io/WebComponentsDemo/
