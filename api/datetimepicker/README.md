@@ -86,6 +86,6 @@ js部分
         * 返回值：合并后的S对象
 
 * 基本样式
-    * 组件最外层className `rgb-dtp`
+    * 组件最外层className `ks-dtp`
     * 日历组件最外层className `dtp-date`
-    * 按钮的className `.rgb-dtp .icon`    
+    * 按钮的className `.ks-dtp .icon`    
