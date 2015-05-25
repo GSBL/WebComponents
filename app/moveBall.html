@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>canvas-track</title>
+        <style>
+            html,body{
+                margin: 0px;
+                padding: 0px;
+                text-align: center;
+            }
+            canvas{
+                position: absolute;
+                top: 40px;
+                left: 50%;
+                margin-left:-400px;  
+                background-color: #dedede;
+            }
+        </style>
+    </head>
+    <body>
+        <p>这个算不上组件，就是一个小玩意，至于怎么玩，移动鼠标就知道了</p>
+        <canvas id="canvas-track" width="800" height="600"></canvas>
+        <script type="text/javascript" src="../static/moveBall/src/moveBall.js"></script>
+		<script>
+			window.onload = function () {
+				new MoveBall("canvas-track")
+			}
+		</script>
+    </body>
+</html>

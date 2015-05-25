@@ -1,0 +1,75 @@
+.content-sidebar { 
+	width: 262px; 
+	float: left;
+}
+.content-sidebar > div {
+	border: 1px solid #e6e8e9;
+	box-shadow: 0px 1px 2px #d5d7d8; 
+	background-color: #fff;
+}
+.content-sidebar-search { 
+	margin-top: 20px;
+	overflow: hidden;
+}
+/*输入框*/
+.content-search-input { 
+	width: 200px; 
+	line-height: 18px; 
+	padding: 10px; 
+	margin: 0; 
+	border: 0 none; 
+	font-size: 12px; 
+	font-family: inherit; 
+	float: left; 
+}
+.content-sidebar-search.focus { 
+	border-color: #2ea7e0;
+}
+.content-search-input:focus { 
+	outline: 0 none;
+}
+.content-search-input::-ms-clear { 
+	display: none; 
+}
+/*搜索按钮*/
+.content-search-btn { 
+	width: 38px; 
+	height: 38px; 
+	float: right; 
+	background: url(../images/search.png); 
+	text-indent: -9em; overflow: hidden; 
+}
+.focus .content-search-btn { 
+	background-position: 0 -38px; 
+}
+/*搜索结果列表*/
+.content-sidebar-result { 
+	display: none; 
+	position: absolute; 
+	width: 260px; 
+	margin: 39px 0 0 -1px; 
+	padding-left: 0; 
+	list-style-type: none; 
+	border: 1px solid #e6e8e9; 
+	background-color: #fff; 
+	box-shadow: 0px 1px 2px #d5d7d8; 
+	font-size: 12px;
+}
+.content-sidebar-result > li { 
+	line-height: 30px; 
+	padding-left: 12px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap; 
+}
+.content-sidebar-result > li:hover {
+	background-color: #f9f9f9; 
+}
+.content-sidebar-result a { 
+	display: block; 
+	color: #5e5e5e; 
+	text-decoration: none; 
+}
+.content-sidebar-result a:hover {
+	color: #000; 
+}

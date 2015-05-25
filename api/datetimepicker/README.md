@@ -10,14 +10,10 @@ Datetimepicker是一个日期选择组件
 
 ## 引入组件
 
-```html
-css部分
-<head><link rel="stylesheet" type="text/css" href="../static/datetimepicker/src/datetimepicker.css"></head>
+css部分 需要引入static/datetimepicker/src下面的`datetimepicker.css`
 
-js部分
-<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../static/datetimepicker/src/datetimepicker.js"></script>
-```
+js部分 需要引入static/datetimepicker/src下面的`datetimepicker.js`
+
 
 ## 初始化组件
 
@@ -89,3 +85,7 @@ js部分
     * 组件最外层className `rgb-dtp`
     * 日历组件最外层className `dtp-date`
     * 按钮的className `.rgb-dtp .icon`    
+
+## todo
+* 时间选择器
+* 移动端优化
