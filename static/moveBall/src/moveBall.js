@@ -47,7 +47,7 @@ var MoveBall = function() {
 			addHandler(canvas, "mouseout", _mouseup)
 		})
 
-		// 鼠标移动事件
+		// mousemove事件
 		function _mousemove(event) {
 			var pos = {}
 			event = event || window.event
@@ -58,7 +58,7 @@ var MoveBall = function() {
 			})(event), 50)
 		}
 
-		// 鼠标移出canvas和mouseup事件
+		// mouseout和mouseup事件
 		function _mouseup(event) {
 			var cxt = context,
 				i = 0,
@@ -66,7 +66,7 @@ var MoveBall = function() {
 				canvasWidth = canvas.width,
 				canvasHeigth = canvas.height
 
-			// 清楚鼠标移动事件的定时器
+			// 清除mouseout的定时器
 			clearInterval(timer)
 
 			removeHandler(canvas, "mousemove", _mousemove)
@@ -91,7 +91,7 @@ var MoveBall = function() {
 
 	}
 
-	// 计算canvas到window的距离
+	// 将一个相对于文档的坐标转化相对于canvas坐标
 	function posInCanvas(canvas, x, y) {
 		var rectMoveBall = canvas.getBoundingClientRect()
 

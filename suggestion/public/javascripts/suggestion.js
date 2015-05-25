@@ -27,7 +27,6 @@ var Suggestion = function () {
 
         // 更新配置项 
         mix(self._options,opts)
-        var selfOpts = self._options
 
         // 设置suggestion节点
         self.componentNode = self.createElem()
@@ -57,14 +56,14 @@ var Suggestion = function () {
      * 绑定事件
      */
     Suggestion.prototype.bind = function () {
-        var self = this
-        var selfOpts = self._options
-        var componentNode = self.componentNode
-        var resultNode = componentNode.find(".content-sidebar-result")
-        var inputNode = componentNode.find(".content-search-input")
-        var sidebarSearchNode = componentNode.find(".content-sidebar-search")
+        var self = this,
+        selfOpts = self._options,
+        componentNode = self.componentNode,
+        resultNode = componentNode.find(".content-sidebar-result"),
+        inputNode = componentNode.find(".content-search-input"),
+        sidebarSearchNode = componentNode.find(".content-sidebar-search")
 
-        // 添加input的focus、blur、enter、input事件
+        // 添加input的focus、blur、enter键、input事件
         componentNode.on("focus",".content-search-input",function (e) {
             sidebarSearchNode.attr("class","content-sidebar-search focus")
             
@@ -76,8 +75,12 @@ var Suggestion = function () {
                 resultNode.hide()
             }
         }).on("keypress",".content-search-input",function (e) {
+
+            // 如果按下enter键，触发onSearch
            e.keyCode === 13 && selfOpts.onSearch.call(this,self,e)
         }).on("input propertychange",".content-search-input",function () {
+
+            // 如果input的值不为空，渲染result列表
             if(inputNode.val()!=""){
                 self.render(inputNode.val())
                 resultNode.show()
@@ -86,7 +89,7 @@ var Suggestion = function () {
             } 
         })
 
-        // 自定义点击搜索之后的事件
+        // 自定义点击搜索按钮之后的事件
         componentNode.on("click",".content-search-btn",function (e) {
             selfOpts.onSearch.call(this,self,e)
         })
@@ -96,9 +99,9 @@ var Suggestion = function () {
      * 渲染result列表
      */
     Suggestion.prototype.render = function (keyword) {
-        var self = this
-        var selfOpts = self._options
-        var componentNode = self.componentNode 
+        var self = this,
+        selfOpts = self._options,
+        componentNode = self.componentNode 
         $.ajax({
             url: selfOpts.url,
             type: selfOpts.type,

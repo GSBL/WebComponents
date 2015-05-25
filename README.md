@@ -1,6 +1,7 @@
 # some web component demo
 
 ## 目录结构如下
+* 注：因为`suggestion`组件涉及后台程序，所以独立出来了
 ```
  WebComponentsDemo/
    |-- sea-modules      存放 seajs、jquery 等文件
@@ -16,7 +17,7 @@
    |      |-- datetimepicker.html
    |      |-- moveBall.html
    |      `-- time-meter.html
-   |-- suggestion       因为suggestion涉及后台程序，所以独立出来了
+   |-- suggestion       
    |
    `-- index.html
 ```

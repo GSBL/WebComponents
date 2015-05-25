@@ -49,6 +49,19 @@ var DateTimePicker = (function() {
 		self.setPosition();
 	}
 	/**
+	 * 生成展示元素
+	 */
+	DateTimePicker.prototype.createElem = function() {
+		var self = this;
+
+		var tempNode = '<div class="rgb-dtp dtp-' + new Date().getTime() + '" style="display:none;">';
+		tempNode += template + "</div>";
+		tempNode = $(tempNode);
+		$(document.body).append(tempNode);
+
+		return tempNode;
+	}
+	/**
 	 * 绑定相关事件
 	 */
 	DateTimePicker.prototype.bind = function() {
@@ -144,6 +157,7 @@ var DateTimePicker = (function() {
 			self.selectedDate = new Date(target.attr("data-year"), target.attr("data-month"), target.attr("data-date"));
 		});
 	}
+
 	/**
 	 * 渲染组件
 	 */
@@ -239,19 +253,7 @@ var DateTimePicker = (function() {
 		}
 
 	}
-	/**
-	 * 生成展示元素
-	 */
-	DateTimePicker.prototype.createElem = function() {
-		var self = this;
-
-		var tempNode = '<div class="rgb-dtp dtp-' + new Date().getTime() + '" style="display:none;">';
-		tempNode += template + "</div>";
-		tempNode = $(tempNode);
-		$(document.body).append(tempNode);
-
-		return tempNode;
-	};
+	
 	/**
 	 * 定位组件
 	 */
