@@ -1,3 +1,30 @@
+// 封装一个requestAnimationFrame，用于实现60帧动画效果
+(function() {
+    var lastTime = 0
+    var vendors = ['webkit', 'moz','o','ms']
+    // 在vendors提供requestAnimationFrame的情况下，调用相应的方法
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame']
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame']
+    }
+    // 用setTimeout模拟requestAnimationFrame
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime(),
+            	lastTime = 0,
+           		timeToCall = Math.max(0, 16 - (currTime - lastTime))
+            var id = window.setTimeout(function() {
+            	callback(currTime + timeToCall) 
+            },timeToCall)
+            lastTime = currTime + timeToCall
+            return id
+        }
+
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id)
+        }
+}())
 var MoveBall = function() {
 	// 一时想不到该叫啥名字...
 	function MoveBall(id) {
@@ -21,9 +48,12 @@ var MoveBall = function() {
 	}
 	// 绘制小球
 	MoveBall.prototype.render = function(context, x, y) {
+		context.save()
 		context.beginPath()
-		context.arc(x, y, this.radius, 0, 2 * Math.PI, false)
+		context.translate(x,y)
+		context.arc(0, 0, this.radius, 0, 2 * Math.PI, false)
 		context.fill()
+		context.restore()
 	}
 	// 绑定事件
 	MoveBall.prototype.bind = function() {
@@ -33,7 +63,7 @@ var MoveBall = function() {
 			timer = null,
 			radius = self.radius,
 			trail = [], // 记录小球路径
-			moveTime = 50 // 小球平移时间间隔，单位毫秒 
+			moveTime = 1000/60 // 小球平移时间间隔，单位毫秒 
 
 		addHandler(canvas, "mousedown", function(event) {
 			event = event || window.event
@@ -74,19 +104,18 @@ var MoveBall = function() {
 			removeHandler(canvas, "mouseout", _mouseup)
 
 			// 小球动画效果
-			timer = setInterval(function() {
+			requestAnimationFrame(function() {
 				// 确保小球在canvas内部移动
 				if(i<len && trail && trail[i].x >radius && trail[i].x <canvasWidth-radius && trail[i].y >radius && trail[i].y <canvasHeigth-radius){
 					cxt.clearRect(0, 0, canvasWidth, canvasHeigth)
 					self.render(cxt, trail[i].x, trail[i++].y)
+					requestAnimationFrame(arguments.callee)
 				}else{
-					// 停止移动 
-					clearInterval(timer)
 					// 清空路径
 					trail = []
 					i = 0
 				}
-			}, moveTime)
+			})
 		}
 
 	}
