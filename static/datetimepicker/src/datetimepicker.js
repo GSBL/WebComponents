@@ -22,7 +22,7 @@ var DateTimePicker = (function() {
 		};
 
 		// 组件被选中的时间
-		this.selectedDate = "";
+		this.selectedDate = new Date();
 
 		// 用于存放组件节点
 		this.dtpNode = null;
@@ -155,6 +155,7 @@ var DateTimePicker = (function() {
 			// 更新start元素的值 
 			selfOpts.start.val(fullDate);
 			self.selectedDate = new Date(target.attr("data-year"), target.attr("data-month"), target.attr("data-date"));
+			self.render(self.selectedDate);
 		});
 	}
 
@@ -213,7 +214,7 @@ var DateTimePicker = (function() {
 		}
 
 		dtpNode.find(".data-calendar tbody").html(tbody);
-
+		// debugger
 		// 渲染年份
 		var yearSelect = dtpNode.find(".header-year");
 		var created = yearSelect.find("option");
@@ -226,9 +227,9 @@ var DateTimePicker = (function() {
 			yearSelect.html(tmpStr);
 		}
 
-		var lastSelected = yearSelect.find("option:selected");
+		var lastSelected = yearSelect.find("option[selected]");
 		var curSelected = yearSelect.find(".year-op-" + curYear);
-		if (lastSelected != curSelected) {
+		if (lastSelected.val() != curSelected.val()) {
 			lastSelected.removeAttr("selected");
 			curSelected.attr("selected", "selected");
 		}
@@ -247,7 +248,7 @@ var DateTimePicker = (function() {
 
 		lastSelected = monthSelect.find("option:selected");
 		curSelected = monthSelect.find(".month-op-" + curMonth);
-		if (lastSelected != curSelected) {
+		if (lastSelected.val() != curSelected.val()) {
 			lastSelected.removeAttr("selected");
 			curSelected.attr("selected", "selected");
 		}
